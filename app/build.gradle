@@ -17,6 +17,17 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    flavorDimensions "type"
+
+    productFlavors {
+        dev {
+            buildConfigField 'String', 'BASE_URL', '"https://api.themoviedb.org/3/"'
+        }
+        prod {
+            buildConfigField 'String', 'BASE_URL', '"https://api.themoviedb.org/3/"'
+        }
+    }
+
     buildFeatures {
         viewBinding true
     }
