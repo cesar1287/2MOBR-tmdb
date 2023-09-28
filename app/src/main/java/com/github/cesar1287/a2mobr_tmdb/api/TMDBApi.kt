@@ -11,4 +11,9 @@ interface TMDBApi {
     suspend fun getNowPlayingMovies(
         @Query("page") page: Int
     ): Response<MoviesResults>
+
+    @GET("movie/popular")
+    suspend fun getPopularMovies(
+        @Query("page") page: Int
+    ): Response<MoviesResults>
 }

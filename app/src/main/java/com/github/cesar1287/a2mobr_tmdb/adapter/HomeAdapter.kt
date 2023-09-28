@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.github.cesar1287.a2mobr_tmdb.databinding.WatchCardItemBinding
 import com.github.cesar1287.a2mobr_tmdb.model.Movie
 
@@ -26,10 +27,9 @@ class HomeAdapter : ListAdapter<Movie, HomeAdapter.ViewHolder>(Movie.DIFF_CALLBA
             movie: Movie?
         ) = with(binding) {
             movie?.let {
-//                GlideApp.with(itemView.context)
-//                    .load(movie.posterPath)
-//                    .placeholder(R.drawable.app_logo_512)
-//                    .into(ivWatchImage)
+                Glide.with(itemView.context)
+                    .load(movie.posterPath)
+                    .into(ivWatchImage)
                 tvWatchTitle.text = movie.title
                 //tvWatchYear.text = movie.year
                 //tvWatchGenre.text = movie.genres

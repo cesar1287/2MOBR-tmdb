@@ -26,8 +26,8 @@ class HomeViewModel: BaseViewModel() {
             callApi(
                 call = suspend { homeUseCase.getNowPlayingMovies() },
                 onSuccess = {
-                    val moviesResults = it as? MoviesResults
-                    _nowPlayingMoviesList.postValue(moviesResults?.results)
+                    val genericList = it as? List<*>
+                    _nowPlayingMoviesList.postValue(genericList?.filterIsInstance<Movie>())
                 }
             )
 
