@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cvWatch"
+    style="@style/WatchCardDefault"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivWatchImage"
+            android:layout_width="@dimen/watch_card_img_width"
+            android:layout_height="@dimen/watch_card_img_height"
+            android:contentDescription="@string/media_poster"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvWatchYear"
+            style="@style/WatchCardYear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="YEAR" />
+
+        <TextView
+            android:id="@+id/tvWatchTime"
+            style="@style/WatchCardProvider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@id/ivWatchImage"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="TIME" />
+
+        <TextView
+            android:id="@+id/tvWatchTitle"
+            style="@style/WatchCardTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@id/ivWatchImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvWatchYear"
+            tools:text="Title" />
+
+        <TextView
+            android:id="@+id/tvWatchGenre"
+            style="@style/WatchCardGenre"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@id/ivWatchImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvWatchTitle"
+            tools:text="Ação, Thriller, Ficção científica" />
+
+        <TextView
+            android:id="@+id/textView"
+            style="@style/WatchCardInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/info"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvWatchGenre"
+            app:layout_constraintVertical_bias="1" />
+
+        <ImageButton
+            android:id="@+id/btWatchShare"
+            style="@style/ButtonIcon"
+            android:layout_width="@dimen/button_icon_size"
+            android:layout_height="@dimen/button_icon_size"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_baseline_share_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/ivWatchImage"
+            app:layout_constraintTop_toBottomOf="@id/tvWatchGenre"
+            app:layout_constraintVertical_bias="1" />
+
+        <ImageButton
+            android:id="@+id/btFavoriteMovie"
+            style="@style/ButtonIcon"
+            android:layout_width="@dimen/button_icon_size"
+            android:layout_height="@dimen/button_icon_size"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_favorite_border_24px"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btWatchShare"
+            app:layout_constraintTop_toTopOf="@+id/btWatchShare" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
