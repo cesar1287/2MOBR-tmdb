@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">2MOBR-TMDB</string>
+    <string name="error_default">Error! Something unexpected happened, try again!</string>
 </resources>

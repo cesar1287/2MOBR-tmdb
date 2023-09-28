@@ -11,7 +11,7 @@ object ApiClient {
 
     val tmdbApi: TMDBApi = getTMDBApiClient().create(TMDBApi::class.java)
 
-    fun getTMDBApiClient() : Retrofit {
+    private fun getTMDBApiClient() : Retrofit {
         return Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
             .client(getInterceptorClient())
@@ -30,15 +30,13 @@ object ApiClient {
             .readTimeout(10, TimeUnit.SECONDS)
             .writeTimeout(10, TimeUnit.SECONDS)
             .addInterceptor(loggingInterceptor)
-//            .addInterceptor { chain ->
-//                val url = chain.request().url.newBuilder()
-//                    .addQueryParameter(API_TOKEN_KEY, API_TOKEN)
-//                    .addQueryParameter(QUERY_PARAM_LANGUAGE_LABEL, queryParamLanguageValue())
-//                    .addQueryParameter(QUERY_PARAM_REGION_LABEL, QUERY_PARAM_REGION_VALUE)
-//                    .build()
-//                val newRequest = chain.request().newBuilder().url(url).build()
-//                chain.proceed(newRequest)
-//            }
+            .addInterceptor { chain ->
+                val newRequest = chain.request().newBuilder()
+                    .addHeader("Authorization", "Bearer ${BuildConfig.AUTH_TOKEN}")
+                    .addHeader("accept", "application/json")
+                    .build()
+                chain.proceed(newRequest)
+            }
         return interceptor.build()
     }
 }
