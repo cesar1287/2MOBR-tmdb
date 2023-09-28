@@ -21,5 +21,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         viewModel.getNowPlayingMovies()
+
+        registerObservers()
+    }
+
+    private fun registerObservers() {
+        viewModel.nowPlayingMoviesList.observe(this) {
+
+        }
     }
 }

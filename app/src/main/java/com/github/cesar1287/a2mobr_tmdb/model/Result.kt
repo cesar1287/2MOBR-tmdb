@@ -2,7 +2,7 @@ package com.github.cesar1287.a2mobr_tmdb.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Result(
+data class Movie(
     val adult: Boolean,
     @SerializedName("backdrop_path")
     val backdropPath: String,
