@@ -7,13 +7,14 @@ import com.github.cesar1287.a2mobr_tmdb.base.BaseViewModel
 import com.github.cesar1287.a2mobr_tmdb.domain.HomeUseCase
 import com.github.cesar1287.a2mobr_tmdb.model.Movie
 import com.github.cesar1287.a2mobr_tmdb.model.MoviesResults
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeViewModel: BaseViewModel() {
-
-    private val homeUseCase: HomeUseCase by lazy {
-        HomeUseCase()
-    }
+@HiltViewModel
+class HomeViewModel @Inject constructor(
+    private val homeUseCase: HomeUseCase
+)  : BaseViewModel() {
 
     private val _nowPlayingMoviesList: MutableLiveData<List<Movie>> = MutableLiveData()
 

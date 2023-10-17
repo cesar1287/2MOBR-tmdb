@@ -5,12 +5,11 @@ import com.github.cesar1287.a2mobr_tmdb.data.HomeRepository
 import com.github.cesar1287.a2mobr_tmdb.data.HomeRepositoryImpl
 import com.github.cesar1287.a2mobr_tmdb.model.MoviesResults
 import com.github.cesar1287.a2mobr_tmdb.utils.ResponseApi
+import javax.inject.Inject
 
-class HomeUseCase {
-
-    private val homeRepository: HomeRepository by lazy {
-        HomeRepositoryImpl()
-    }
+class HomeUseCase @Inject constructor(
+    private val homeRepository: HomeRepository
+) {
 
     suspend fun getNowPlayingMovies(): ResponseApi {
         return when(

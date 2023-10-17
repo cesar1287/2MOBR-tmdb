@@ -1,23 +1,23 @@
 package com.github.cesar1287.a2mobr_tmdb
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.cesar1287.a2mobr_tmdb.adapter.HomeAdapter
 import com.github.cesar1287.a2mobr_tmdb.databinding.ActivityMainBinding
 import com.github.cesar1287.a2mobr_tmdb.presentation.HomeViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private val binding: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
-    private val viewModel: HomeViewModel by lazy {
-        ViewModelProvider(this)[HomeViewModel::class.java]
-    }
+    private val viewModel: HomeViewModel by viewModels()
 
     private val homeAdapter: HomeAdapter by lazy {
         HomeAdapter()
