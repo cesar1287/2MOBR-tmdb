@@ -1,15 +1,18 @@
 package com.github.cesar1287.a2mobr_tmdb.data
 
-import com.github.cesar1287.a2mobr_tmdb.api.ApiClient
+import com.github.cesar1287.a2mobr_tmdb.api.TMDBApi
 import com.github.cesar1287.a2mobr_tmdb.base.BaseRepository
 import com.github.cesar1287.a2mobr_tmdb.model.MoviesResults
 import com.github.cesar1287.a2mobr_tmdb.utils.ResponseApi
+import javax.inject.Inject
 
-class HomeRepositoryImpl: HomeRepository, BaseRepository() {
+class HomeRepositoryImpl @Inject constructor(
+    private val tmdbApi: TMDBApi
+): HomeRepository, BaseRepository() {
 
     override suspend fun getNowPlayingMovies(): ResponseApi {
         return safeApiCall {
-            ApiClient.tmdbApi.getNowPlayingMovies(1)
+            tmdbApi.getNowPlayingMovies(1)
         }.let { response ->
             when (response) {
                 is ResponseApi.Success -> {

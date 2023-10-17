@@ -1,25 +1,41 @@
-package com.github.cesar1287.a2mobr_tmdb.api
+package com.github.cesar1287.a2mobr_tmdb.di
 
 import com.github.cesar1287.a2mobr_tmdb.BuildConfig
+import com.github.cesar1287.a2mobr_tmdb.api.TMDBApi
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-object ApiClient {
+@Module
+@InstallIn(SingletonComponent::class)
+class ApiModule {
 
-    val tmdbApi: TMDBApi = getTMDBApiClient().create(TMDBApi::class.java)
-
-    private fun getTMDBApiClient() : Retrofit {
+    @Provides
+    fun provideApiClient(
+        okHttpClient: OkHttpClient
+    ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
-            .client(getInterceptorClient())
+            .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 
-    private fun getInterceptorClient(): OkHttpClient {
+    @Provides
+    fun provideTmdbApi(
+        apiClient: Retrofit
+    ): TMDBApi {
+        return apiClient.create(TMDBApi::class.java)
+    }
+
+    @Provides
+    fun provideOkhttpClient(): OkHttpClient {
         val loggingInterceptor = HttpLoggingInterceptor()
         if (BuildConfig.DEBUG) {
             loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
