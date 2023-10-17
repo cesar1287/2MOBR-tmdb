@@ -1,4 +1,4 @@
-package com.github.cesar1287.a2mobr_tmdb.data
+package com.github.cesar1287.a2mobr_tmdb.feature.home.data
 
 import com.github.cesar1287.a2mobr_tmdb.api.TMDBApi
 import com.github.cesar1287.a2mobr_tmdb.base.BaseRepository

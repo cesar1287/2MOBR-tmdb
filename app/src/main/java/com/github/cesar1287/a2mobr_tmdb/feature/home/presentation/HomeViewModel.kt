@@ -1,12 +1,11 @@
-package com.github.cesar1287.a2mobr_tmdb.presentation
+package com.github.cesar1287.a2mobr_tmdb.feature.home.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.github.cesar1287.a2mobr_tmdb.base.BaseViewModel
-import com.github.cesar1287.a2mobr_tmdb.domain.HomeUseCase
+import com.github.cesar1287.a2mobr_tmdb.feature.home.domain.HomeUseCase
 import com.github.cesar1287.a2mobr_tmdb.model.Movie
-import com.github.cesar1287.a2mobr_tmdb.model.MoviesResults
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

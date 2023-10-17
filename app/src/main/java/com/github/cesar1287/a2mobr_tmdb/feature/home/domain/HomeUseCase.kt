@@ -1,8 +1,7 @@
-package com.github.cesar1287.a2mobr_tmdb.domain
+package com.github.cesar1287.a2mobr_tmdb.feature.home.domain
 
 import com.github.cesar1287.a2mobr_tmdb.BuildConfig
-import com.github.cesar1287.a2mobr_tmdb.data.HomeRepository
-import com.github.cesar1287.a2mobr_tmdb.data.HomeRepositoryImpl
+import com.github.cesar1287.a2mobr_tmdb.feature.home.data.HomeRepository
 import com.github.cesar1287.a2mobr_tmdb.model.MoviesResults
 import com.github.cesar1287.a2mobr_tmdb.utils.ResponseApi
 import javax.inject.Inject
