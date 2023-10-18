@@ -1,14 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".feature.details.MovieDetailsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content">
 
-</FrameLayout>
+        <ImageButton
+            android:id="@+id/btMovieDetailsBackIcon"
+            style="@style/ButtonIcon"
+            android:layout_width="@dimen/button_icon_size"
+            android:layout_height="@dimen/button_icon_size"
+            android:layout_marginStart="@dimen/margin_half"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_arrow_back"
+            app:layout_constraintBottom_toTopOf="@id/ivMovieDetailsPosterImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/btMovieDetailsShareButton"
+            style="@style/ButtonIcon"
+            android:layout_width="@dimen/button_icon_size"
+            android:layout_height="@dimen/button_icon_size"
+            android:layout_marginEnd="@dimen/margin_half"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_baseline_share_24"
+            app:layout_constraintBottom_toTopOf="@id/ivMovieDetailsPosterImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivMovieDetailsPosterImage"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/image_background_detail_height"
+            android:layout_marginTop="@dimen/custom_margin_top_background_detail"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <include
+            android:id="@+id/cmpMovieDetailsBottomCard"
+            layout="@layout/cmp_media_details_bottom_poster_card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivMovieDetailsPosterImage" />
+
+        <TextView
+            android:id="@+id/tvMovieDetailSynopsisText"
+            style="@style/MovieTvSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/synopsis"
+            app:layout_constraintBottom_toTopOf="@id/tvMovieDetailsDescriptionText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cmpMovieDetailsBottomCard" />
+
+        <TextView
+            android:id="@+id/tvMovieDetailsDescriptionText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_default"
+            android:layout_marginEnd="@dimen/margin_default"
+            android:layout_marginBottom="@dimen/margin_default"
+            app:layout_constraintBottom_toTopOf="@+id/btMovieDetailNearbyTheaters"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvMovieDetailSynopsisText"
+            tools:text="No fim do anos 70, em Nova York, um grupo diversificado de caçadores de nazistas descobrem que centenas de oficiais nazistas de alto escalão estão vivendo entre nós e conspirando para criar um Quarto Reich nos EUA. A eclética equipe de Caçadores iniciará uma sangrenta busca para levar os nazistas à justiça e frustrar seus novos planos genocidas." />
+
+        <Button
+            android:id="@+id/btMovieDetailNearbyTheaters"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_default"
+            android:text="@string/nearby_theaters"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvMovieDetailsDescriptionText" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

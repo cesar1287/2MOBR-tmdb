@@ -49,7 +49,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun registerObservers() {
-        viewModel.nowPlayingMoviesList.observe(this) {
+        viewModel.nowPlayingMoviesList.observe(viewLifecycleOwner) {
             it?.let {
                 homeAdapter.submitList(it)
             }

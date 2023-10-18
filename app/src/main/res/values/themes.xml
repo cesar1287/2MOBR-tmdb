@@ -75,4 +75,24 @@
         <item name="android:maxLines">1</item>
         <item name="android:ellipsize">end</item>
     </style>
+
+    <style name="TitleDefault">
+        <item name="android:layout_marginTop">@dimen/margin_double</item>
+        <item name="android:layout_marginBottom">@dimen/margin_default</item>
+        <item name="android:layout_marginStart">@dimen/margin_default</item>
+        <item name="android:layout_marginEnd">@dimen/margin_default</item>
+        <item name="android:textColor">@color/blue</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">@dimen/title_size</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
+    <style name="SubtitleDefault" parent="TitleDefault">
+        <item name="android:textSize">@dimen/subtitle_size</item>
+    </style>
+
+    <style name="MovieTvSubtitle" parent="SubtitleDefault">
+        <item name="android:textAlignment">viewStart</item>
+        <item name="fontWeight">100</item>
+    </style>
 </resources>
