@@ -19,6 +19,7 @@ class HomeUseCase @Inject constructor(
                 val moviesList = moviesResults?.results
                 moviesList?.map {
                     it.posterPath = "${BuildConfig.IMAGE_URL}${it.posterPath}"
+                    it.backdropPath = "${BuildConfig.IMAGE_URL}${it.backdropPath}"
                 }
 
                 ResponseApi.Success(moviesList)
