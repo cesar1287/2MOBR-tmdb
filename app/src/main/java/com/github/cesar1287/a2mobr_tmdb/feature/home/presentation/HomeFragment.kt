@@ -1,15 +1,14 @@
 package com.github.cesar1287.a2mobr_tmdb.feature.home.presentation
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.github.cesar1287.a2mobr_tmdb.R
 import com.github.cesar1287.a2mobr_tmdb.adapter.HomeAdapter
 import com.github.cesar1287.a2mobr_tmdb.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,7 +22,9 @@ class HomeFragment : Fragment() {
 
     private val homeAdapter: HomeAdapter by lazy {
         HomeAdapter { movie ->
-            findNavController().navigate(R.id.action_homeFragment_to_movieDetailsFragment)
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragmentToMovieDetailsFragment(movie)
+            )
         }
     }
 

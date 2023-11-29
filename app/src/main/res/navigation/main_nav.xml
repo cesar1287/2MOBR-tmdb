@@ -10,6 +10,7 @@
         android:name="com.github.cesar1287.a2mobr_tmdb.feature.home.presentation.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
+
         <action
             android:id="@+id/action_homeFragment_to_movieDetailsFragment"
             app:destination="@id/movieDetailsFragment" />
@@ -19,5 +20,10 @@
         android:id="@+id/movieDetailsFragment"
         android:name="com.github.cesar1287.a2mobr_tmdb.feature.details.MovieDetailsFragment"
         android:label="fragment_movie_details"
-        tools:layout="@layout/fragment_movie_details" />
+        tools:layout="@layout/fragment_movie_details">
+
+        <argument
+            android:name="movie"
+            app:argType="com.github.cesar1287.a2mobr_tmdb.model.Movie" />
+    </fragment>
 </navigation>

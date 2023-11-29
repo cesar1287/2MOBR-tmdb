@@ -1,8 +1,11 @@
 package com.github.cesar1287.a2mobr_tmdb.model
 
+import android.os.Parcelable
 import androidx.recyclerview.widget.DiffUtil
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Movie(
     val adult: Boolean,
     @SerializedName("backdrop_path")
@@ -21,7 +24,7 @@ data class Movie(
     @SerializedName("release_date")
     val releaseDate: String,
     val title: String,
-) {
+): Parcelable {
 
     companion object {
         var DIFF_CALLBACK: DiffUtil.ItemCallback<Movie> =
