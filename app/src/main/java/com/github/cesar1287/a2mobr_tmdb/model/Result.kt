@@ -7,23 +7,21 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Movie(
-    val adult: Boolean,
+    val adult: Boolean = false,
     @SerializedName("backdrop_path")
-    var backdropPath: String,
-    @SerializedName("genre_ids")
-    val genreIds: List<Int>,
-    val id: Int,
+    var backdropPath: String = "",
+    val id: Int = 0,
     @SerializedName("original_language")
-    val originalLanguage: String,
+    val originalLanguage: String = "",
     @SerializedName("original_title")
-    val originalTitle: String,
-    val overview: String,
-    val popularity: Double,
+    val originalTitle: String = "",
+    val overview: String = "",
+    val popularity: Double = 0.0,
     @SerializedName("poster_path")
-    var posterPath: String,
+    var posterPath: String = "",
     @SerializedName("release_date")
-    val releaseDate: String,
-    val title: String,
+    val releaseDate: String = "",
+    val title: String = "",
 ): Parcelable {
 
     companion object {

@@ -30,6 +30,14 @@ class HomeUseCase @Inject constructor(
     }
 
     fun saveMovies(movies: List<Movie>) {
-        homeRepository.saveMovies(movies)
+        homeRepository.saveMovies(
+            movies.map {
+                val movie = it.copy()
+                movie.posterPath = movie.posterPath.substringAfter(BuildConfig.IMAGE_URL)
+                movie.backdropPath = movie.backdropPath.substringAfter(BuildConfig.IMAGE_URL)
+
+                movie
+            }
+        )
     }
 }

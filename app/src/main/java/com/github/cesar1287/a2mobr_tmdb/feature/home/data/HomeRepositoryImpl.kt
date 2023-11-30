@@ -9,6 +9,7 @@ import com.github.cesar1287.a2mobr_tmdb.utils.ResponseApi
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class HomeRepositoryImpl @Inject constructor(
@@ -24,7 +25,19 @@ class HomeRepositoryImpl @Inject constructor(
                     response.data = response.data as? MoviesResults
                     return@let response
                 }
-                is ResponseApi.Error -> return@let response
+                is ResponseApi.Error -> {
+                    val moviesRef = Firebase.firestore.collection(FIRESTORE_COLLECTION_MOVIES)
+                    return try {
+                        val querySnapshot = moviesRef.get().await()
+                        ResponseApi.Success(
+                            MoviesResults(
+                                results = querySnapshot.toObjects(Movie::class.java)
+                            )
+                        )
+                    } catch (exception: Exception) {
+                        response
+                    }
+                }
             }
         }
     }
