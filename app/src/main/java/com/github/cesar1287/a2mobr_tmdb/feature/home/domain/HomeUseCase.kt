@@ -2,6 +2,7 @@ package com.github.cesar1287.a2mobr_tmdb.feature.home.domain
 
 import com.github.cesar1287.a2mobr_tmdb.BuildConfig
 import com.github.cesar1287.a2mobr_tmdb.feature.home.data.HomeRepository
+import com.github.cesar1287.a2mobr_tmdb.model.Movie
 import com.github.cesar1287.a2mobr_tmdb.model.MoviesResults
 import com.github.cesar1287.a2mobr_tmdb.utils.ResponseApi
 import javax.inject.Inject
@@ -26,5 +27,9 @@ class HomeUseCase @Inject constructor(
             }
             else -> response
         }
+    }
+
+    fun saveMovies(movies: List<Movie>) {
+        homeRepository.saveMovies(movies)
     }
 }

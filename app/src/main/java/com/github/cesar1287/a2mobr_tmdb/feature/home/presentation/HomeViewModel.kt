@@ -33,4 +33,12 @@ class HomeViewModel @Inject constructor(
 
         }
     }
+
+    fun saveMoviesIntoFirestore(movies: List<Movie>?) {
+        movies?.let {
+            viewModelScope.launch {
+                homeUseCase.saveMovies(movies)
+            }
+        }
+    }
 }

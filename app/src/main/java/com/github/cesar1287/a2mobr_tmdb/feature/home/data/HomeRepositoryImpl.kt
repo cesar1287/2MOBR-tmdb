@@ -2,8 +2,13 @@ package com.github.cesar1287.a2mobr_tmdb.feature.home.data
 
 import com.github.cesar1287.a2mobr_tmdb.api.TMDBApi
 import com.github.cesar1287.a2mobr_tmdb.base.BaseRepository
+import com.github.cesar1287.a2mobr_tmdb.model.Movie
 import com.github.cesar1287.a2mobr_tmdb.model.MoviesResults
+import com.github.cesar1287.a2mobr_tmdb.utils.Constants.Companion.FIRESTORE_COLLECTION_MOVIES
 import com.github.cesar1287.a2mobr_tmdb.utils.ResponseApi
+import com.google.firebase.firestore.SetOptions
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import javax.inject.Inject
 
 class HomeRepositoryImpl @Inject constructor(
@@ -21,6 +26,14 @@ class HomeRepositoryImpl @Inject constructor(
                 }
                 is ResponseApi.Error -> return@let response
             }
+        }
+    }
+
+    override fun saveMovies(movies: List<Movie>) {
+        movies.forEach {
+            Firebase.firestore.collection(
+                FIRESTORE_COLLECTION_MOVIES
+            ).document(it.id.toString()).set(it, SetOptions.merge())
         }
     }
 }
