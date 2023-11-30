@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<defaults>
+  <entry>
+    <key>movie_details_date_pattern</key>
+    <value>dd/MM/yyyy</value>
+  </entry>
+</defaults>
