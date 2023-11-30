@@ -6,6 +6,7 @@ import com.github.cesar1287.a2mobr_tmdb.model.Movie
 import com.github.cesar1287.a2mobr_tmdb.model.MoviesResults
 import com.github.cesar1287.a2mobr_tmdb.utils.Constants.Companion.FIRESTORE_COLLECTION_MOVIES
 import com.github.cesar1287.a2mobr_tmdb.utils.ResponseApi
+import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -35,6 +36,7 @@ class HomeRepositoryImpl @Inject constructor(
                             )
                         )
                     } catch (exception: Exception) {
+                        Firebase.crashlytics.recordException(exception)
                         response
                     }
                 }
