@@ -16,6 +16,18 @@ class HomeUseCase @Inject constructor(
     private val homeRepository: HomeRepository
 ) {
 
+    private val dateReturnedFormat: SimpleDateFormat by lazy {
+        SimpleDateFormat("yyyy-MM-dd", Locale("pt", "BR"))
+    }
+
+    private val remoteConfigDateFormat: String by lazy {
+        Firebase.remoteConfig["movie_details_date_pattern"].asString()
+    }
+
+    private val actualSimpleDateFormat: SimpleDateFormat by lazy {
+        SimpleDateFormat(remoteConfigDateFormat, Locale("pt", "BR"))
+    }
+
     suspend fun getNowPlayingMovies(): ResponseApi {
         return when(
             val response = homeRepository.getNowPlayingMovies()
@@ -23,16 +35,13 @@ class HomeUseCase @Inject constructor(
             is ResponseApi.Success -> {
                 val moviesResults = response.data as? MoviesResults
                 val moviesList = moviesResults?.results
-                moviesList?.map {
-                    it.posterPath = "${BuildConfig.IMAGE_URL}${it.posterPath}"
-                    it.backdropPath = "${BuildConfig.IMAGE_URL}${it.backdropPath}"
-                    val dateReturnedFormat =
-                        SimpleDateFormat("yyyy-MM-dd", Locale("pt", "BR"))
-                    val dateReturned = dateReturnedFormat.parse(it.releaseDate)
-                    val remoteConfigDateFormat = Firebase.remoteConfig["movie_details_date_pattern"].asString()
-                    val actualSimpleDateFormat =
-                        SimpleDateFormat(remoteConfigDateFormat, Locale("pt", "BR"))
-                    it.releaseDate = actualSimpleDateFormat.format(dateReturned)
+                moviesList?.map { movie ->
+                    movie.posterPath = "${BuildConfig.IMAGE_URL}${movie.posterPath}"
+                    movie.backdropPath = "${BuildConfig.IMAGE_URL}${movie.backdropPath}"
+                    val dateReturned = dateReturnedFormat.parse(movie.releaseDate)
+                    dateReturned?.let { date ->
+                        movie.releaseDate = actualSimpleDateFormat.format(date)
+                    }
                 }
 
                 ResponseApi.Success(moviesList)
@@ -41,43 +50,31 @@ class HomeUseCase @Inject constructor(
         }
     }
 
-    fun saveMovies(movies: List<Movie>) {
-        val dateReturnedFormat =
-            SimpleDateFormat("yyyy-MM-dd", Locale("pt", "BR"))
-        val remoteConfigDateFormat = Firebase.remoteConfig["movie_details_date_pattern"].asString()
-        val actualSimpleDateFormat =
-            SimpleDateFormat(remoteConfigDateFormat, Locale("pt", "BR"))
-
+    fun saveMoviesFirestore(movies: List<Movie>) {
         homeRepository.saveMoviesFirestore(
             movies.map {
-                val movie = it.copy()
-                movie.posterPath = movie.posterPath.substringAfter(BuildConfig.IMAGE_URL)
-                movie.backdropPath = movie.backdropPath.substringAfter(BuildConfig.IMAGE_URL)
-                val dateReturned = actualSimpleDateFormat.parse(movie.releaseDate)
-                movie.releaseDate = dateReturnedFormat.format(dateReturned)
-
-                movie
+                movieNewInstance(it)
             }
         )
     }
 
     suspend fun saveMoviesRoom(moviesList: List<Movie>) {
-        val dateReturnedFormat =
-            SimpleDateFormat("yyyy-MM-dd", Locale("pt", "BR"))
-        val remoteConfigDateFormat = Firebase.remoteConfig["movie_details_date_pattern"].asString()
-        val actualSimpleDateFormat =
-            SimpleDateFormat(remoteConfigDateFormat, Locale("pt", "BR"))
-
         homeRepository.saveMoviesRoom(
             moviesList.map {
-                val movie = it.copy()
-                movie.posterPath = movie.posterPath.substringAfter(BuildConfig.IMAGE_URL)
-                movie.backdropPath = movie.backdropPath.substringAfter(BuildConfig.IMAGE_URL)
-                val dateReturned = actualSimpleDateFormat.parse(movie.releaseDate)
-                movie.releaseDate = dateReturnedFormat.format(dateReturned)
-
-                movie
+                movieNewInstance(it)
             }
         )
+    }
+
+    private fun movieNewInstance(it: Movie): Movie {
+        val movie = it.copy()
+        movie.posterPath = movie.posterPath.substringAfter(BuildConfig.IMAGE_URL)
+        movie.backdropPath = movie.backdropPath.substringAfter(BuildConfig.IMAGE_URL)
+        val dateReturned = actualSimpleDateFormat.parse(movie.releaseDate)
+        dateReturned?.let { date ->
+            movie.releaseDate = dateReturnedFormat.format(date)
+        }
+
+        return movie
     }
 }
