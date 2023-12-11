@@ -7,11 +7,9 @@ import com.github.cesar1287.a2mobr_tmdb.model.Movie
 import com.github.cesar1287.a2mobr_tmdb.model.MoviesResults
 import com.github.cesar1287.a2mobr_tmdb.utils.Constants.Companion.FIRESTORE_COLLECTION_MOVIES
 import com.github.cesar1287.a2mobr_tmdb.utils.ResponseApi
-import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class HomeRepositoryImpl @Inject constructor(
@@ -29,6 +27,7 @@ class HomeRepositoryImpl @Inject constructor(
                     return@let response
                 }
                 is ResponseApi.Error -> {
+                    /** Firestore implementation
                     val moviesRef = Firebase.firestore.collection(FIRESTORE_COLLECTION_MOVIES)
                     return try {
                         val querySnapshot = moviesRef.get().await()
@@ -41,6 +40,13 @@ class HomeRepositoryImpl @Inject constructor(
                         Firebase.crashlytics.recordException(exception)
                         response
                     }
+                    */
+
+                    ResponseApi.Success(
+                        MoviesResults(
+                            results = appDatabase.movieDao().getAllMovies()
+                        )
+                    )
                 }
             }
         }

@@ -23,7 +23,7 @@ class HomeViewModel @Inject constructor(
 
 
     fun getNowPlayingMovies() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             callApi(
                 call = suspend { homeUseCase.getNowPlayingMovies() },
                 onSuccess = {

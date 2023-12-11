@@ -42,11 +42,19 @@ class HomeUseCase @Inject constructor(
     }
 
     fun saveMovies(movies: List<Movie>) {
+        val dateReturnedFormat =
+            SimpleDateFormat("yyyy-MM-dd", Locale("pt", "BR"))
+        val remoteConfigDateFormat = Firebase.remoteConfig["movie_details_date_pattern"].asString()
+        val actualSimpleDateFormat =
+            SimpleDateFormat(remoteConfigDateFormat, Locale("pt", "BR"))
+
         homeRepository.saveMoviesFirestore(
             movies.map {
                 val movie = it.copy()
                 movie.posterPath = movie.posterPath.substringAfter(BuildConfig.IMAGE_URL)
                 movie.backdropPath = movie.backdropPath.substringAfter(BuildConfig.IMAGE_URL)
+                val dateReturned = actualSimpleDateFormat.parse(movie.releaseDate)
+                movie.releaseDate = dateReturnedFormat.format(dateReturned)
 
                 movie
             }
@@ -54,11 +62,19 @@ class HomeUseCase @Inject constructor(
     }
 
     suspend fun saveMoviesRoom(moviesList: List<Movie>) {
+        val dateReturnedFormat =
+            SimpleDateFormat("yyyy-MM-dd", Locale("pt", "BR"))
+        val remoteConfigDateFormat = Firebase.remoteConfig["movie_details_date_pattern"].asString()
+        val actualSimpleDateFormat =
+            SimpleDateFormat(remoteConfigDateFormat, Locale("pt", "BR"))
+
         homeRepository.saveMoviesRoom(
             moviesList.map {
                 val movie = it.copy()
                 movie.posterPath = movie.posterPath.substringAfter(BuildConfig.IMAGE_URL)
                 movie.backdropPath = movie.backdropPath.substringAfter(BuildConfig.IMAGE_URL)
+                val dateReturned = actualSimpleDateFormat.parse(movie.releaseDate)
+                movie.releaseDate = dateReturnedFormat.format(dateReturned)
 
                 movie
             }
