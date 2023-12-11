@@ -56,6 +56,7 @@ class HomeFragment : Fragment() {
     private fun registerObservers() {
         viewModel.nowPlayingMoviesList.observe(viewLifecycleOwner) {
             viewModel.saveMoviesIntoFirestore(it)
+            viewModel.saveMoviesIntoRoom(it)
 
             it?.let {
                 homeAdapter.submitList(it)

@@ -7,6 +7,7 @@ import com.github.cesar1287.a2mobr_tmdb.base.BaseViewModel
 import com.github.cesar1287.a2mobr_tmdb.feature.home.domain.HomeUseCase
 import com.github.cesar1287.a2mobr_tmdb.model.Movie
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -38,6 +39,14 @@ class HomeViewModel @Inject constructor(
         movies?.let {
             viewModelScope.launch {
                 homeUseCase.saveMovies(movies)
+            }
+        }
+    }
+
+    fun saveMoviesIntoRoom(moviesList: List<Movie>?) {
+        moviesList?.let {
+            viewModelScope.launch(Dispatchers.IO) {
+                homeUseCase.saveMoviesRoom(it)
             }
         }
     }

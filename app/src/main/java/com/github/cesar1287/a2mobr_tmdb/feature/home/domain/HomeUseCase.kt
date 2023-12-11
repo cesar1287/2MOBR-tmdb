@@ -42,8 +42,20 @@ class HomeUseCase @Inject constructor(
     }
 
     fun saveMovies(movies: List<Movie>) {
-        homeRepository.saveMovies(
+        homeRepository.saveMoviesFirestore(
             movies.map {
+                val movie = it.copy()
+                movie.posterPath = movie.posterPath.substringAfter(BuildConfig.IMAGE_URL)
+                movie.backdropPath = movie.backdropPath.substringAfter(BuildConfig.IMAGE_URL)
+
+                movie
+            }
+        )
+    }
+
+    suspend fun saveMoviesRoom(moviesList: List<Movie>) {
+        homeRepository.saveMoviesRoom(
+            moviesList.map {
                 val movie = it.copy()
                 movie.posterPath = movie.posterPath.substringAfter(BuildConfig.IMAGE_URL)
                 movie.backdropPath = movie.backdropPath.substringAfter(BuildConfig.IMAGE_URL)

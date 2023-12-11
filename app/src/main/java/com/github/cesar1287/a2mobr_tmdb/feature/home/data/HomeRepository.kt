@@ -6,5 +6,6 @@ import com.github.cesar1287.a2mobr_tmdb.utils.ResponseApi
 interface HomeRepository {
 
     suspend fun getNowPlayingMovies() : ResponseApi
-    fun saveMovies(movies: List<Movie>)
+    fun saveMoviesFirestore(movies: List<Movie>)
+    suspend fun saveMoviesRoom(movies: List<Movie>)
 }

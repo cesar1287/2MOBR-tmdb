@@ -1,6 +1,7 @@
 package com.github.cesar1287.a2mobr_tmdb.di
 
 import com.github.cesar1287.a2mobr_tmdb.api.TMDBApi
+import com.github.cesar1287.a2mobr_tmdb.dao.AppDatabase
 import com.github.cesar1287.a2mobr_tmdb.feature.home.data.HomeRepository
 import com.github.cesar1287.a2mobr_tmdb.feature.home.data.HomeRepositoryImpl
 import dagger.Module
@@ -14,8 +15,9 @@ class RepositoryModule {
 
     @Provides
     fun provideHomeRepository(
-        tmdbApi: TMDBApi
+        tmdbApi: TMDBApi,
+        appDatabase: AppDatabase
     ): HomeRepository {
-        return HomeRepositoryImpl(tmdbApi)
+        return HomeRepositoryImpl(tmdbApi, appDatabase)
     }
 }
