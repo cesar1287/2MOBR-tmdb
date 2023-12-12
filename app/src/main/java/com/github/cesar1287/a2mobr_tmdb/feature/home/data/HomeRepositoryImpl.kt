@@ -7,6 +7,7 @@ import com.github.cesar1287.a2mobr_tmdb.model.Movie
 import com.github.cesar1287.a2mobr_tmdb.model.MoviesResults
 import com.github.cesar1287.a2mobr_tmdb.utils.Constants.Companion.FIRESTORE_COLLECTION_MOVIES
 import com.github.cesar1287.a2mobr_tmdb.utils.ResponseApi
+import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -23,6 +24,8 @@ class HomeRepositoryImpl @Inject constructor(
         }.let { response ->
             when (response) {
                 is ResponseApi.Success -> {
+                    Firebase.analytics.logEvent("data_from_api", null)
+
                     response.data = response.data as? MoviesResults
                     return@let response
                 }
@@ -41,6 +44,7 @@ class HomeRepositoryImpl @Inject constructor(
                         response
                     }
                     */
+                    Firebase.analytics.logEvent("data_from_db", null)
 
                     ResponseApi.Success(
                         MoviesResults(
