@@ -23,16 +23,13 @@ class HomeViewModel @Inject constructor(
 
 
     fun getNowPlayingMovies() {
-        viewModelScope.launch(Dispatchers.IO) {
-            callApi(
-                call = suspend { homeUseCase.getNowPlayingMovies() },
-                onSuccess = {
-                    val genericList = it as? List<*>
-                    _nowPlayingMoviesList.postValue(genericList?.filterIsInstance<Movie>())
-                }
-            )
-
-        }
+        callApi(
+            call = suspend { homeUseCase.getNowPlayingMovies() },
+            onSuccess = {
+                val genericList = it as? List<*>
+                _nowPlayingMoviesList.postValue(genericList?.filterIsInstance<Movie>())
+            }
+        )
     }
 
     fun saveMoviesIntoFirestore(movies: List<Movie>?) {
