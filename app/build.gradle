@@ -111,6 +111,7 @@ dependencies {
     implementation("com.google.firebase:firebase-config-ktx")
     implementation("com.google.firebase:firebase-crashlytics-ktx")
     implementation("com.google.firebase:firebase-perf")
+    implementation("com.google.firebase:firebase-inappmessaging-display-ktx")
 
     //Tests
     testImplementation 'junit:junit:4.13.2'

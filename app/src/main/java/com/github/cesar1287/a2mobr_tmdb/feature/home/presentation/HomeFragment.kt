@@ -1,5 +1,6 @@
 package com.github.cesar1287.a2mobr_tmdb.feature.home.presentation
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.cesar1287.a2mobr_tmdb.adapter.HomeAdapter
 import com.github.cesar1287.a2mobr_tmdb.databinding.FragmentHomeBinding
+import com.google.firebase.inappmessaging.ktx.inAppMessaging
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -60,6 +66,12 @@ class HomeFragment : Fragment() {
 
             it?.let {
                 homeAdapter.submitList(it)
+            }
+        }
+
+        Firebase.inAppMessaging.addClickListener { _, action ->
+            CoroutineScope(Dispatchers.Main).launch {
+                findNavController().navigate(Uri.parse(action.actionUrl))
             }
         }
     }
