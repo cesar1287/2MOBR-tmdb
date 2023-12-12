@@ -8,4 +8,6 @@
 
     <string name="share_movie_message">Hello, see the %1$s movie now. %2$s\n\nCheck out this and other movies in the Filmes 20MOB app. :)</string>
     <string name="share_using">Select:</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

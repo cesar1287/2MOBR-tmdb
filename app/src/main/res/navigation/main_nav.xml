@@ -26,4 +26,15 @@
             android:name="movie"
             app:argType="com.github.cesar1287.a2mobr_tmdb.model.Movie" />
     </fragment>
+
+    <fragment
+        android:id="@+id/ingressoFragment"
+        android:name="com.github.cesar1287.a2mobr_tmdb.feature.ingresso.IngressoFragment"
+        android:label="fragment_ingresso"
+        tools:layout="@layout/fragment_ingresso">
+
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="tmdb://ingresso" />
+    </fragment>
 </navigation>
