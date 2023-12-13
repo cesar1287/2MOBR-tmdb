@@ -8,9 +8,11 @@ import com.github.cesar1287.a2mobr_tmdb.model.MoviesResults
 import com.github.cesar1287.a2mobr_tmdb.utils.Constants.Companion.FIRESTORE_COLLECTION_MOVIES
 import com.github.cesar1287.a2mobr_tmdb.utils.ResponseApi
 import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class HomeRepositoryImpl @Inject constructor(
@@ -30,9 +32,10 @@ class HomeRepositoryImpl @Inject constructor(
                     return@let response
                 }
                 is ResponseApi.Error -> {
-                    /** Firestore implementation
+                    //Firestore implementation
                     val moviesRef = Firebase.firestore.collection(FIRESTORE_COLLECTION_MOVIES)
                     return try {
+                        Firebase.analytics.logEvent("data_from_firestore", null)
                         val querySnapshot = moviesRef.get().await()
                         ResponseApi.Success(
                             MoviesResults(
@@ -41,16 +44,15 @@ class HomeRepositoryImpl @Inject constructor(
                         )
                     } catch (exception: Exception) {
                         Firebase.crashlytics.recordException(exception)
-                        response
-                    }
-                    */
-                    Firebase.analytics.logEvent("data_from_db", null)
 
-                    ResponseApi.Success(
-                        MoviesResults(
-                            results = appDatabase.movieDao().getAllMovies()
+                        Firebase.analytics.logEvent("data_from_db", null)
+
+                        ResponseApi.Success(
+                            MoviesResults(
+                                results = appDatabase.movieDao().getAllMovies()
+                            )
                         )
-                    )
+                    }
                 }
             }
         }

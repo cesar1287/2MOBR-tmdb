@@ -7,10 +7,10 @@ import com.github.cesar1287.a2mobr_tmdb.feature.home.data.HomeRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
+import dagger.hilt.android.components.ViewModelComponent
 
 @Module
-@InstallIn(SingletonComponent::class)
+@InstallIn(ViewModelComponent::class)
 class RepositoryModule {
 
     @Provides
